@@ -13,6 +13,7 @@ if (!isset($_SESSION['id'])) {
 
 $student_id = $_SESSION['id'];
 
+// Fetch payment history
 $sql = "SELECT * FROM payments WHERE student_id = ? ORDER BY payment_date DESC";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $student_id);
@@ -20,23 +21,27 @@ $stmt->execute();
 $payments = $stmt->get_result();
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment History | BayadPro</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/asset/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/asset/css/payment_history.css">
+</head>
+<body>
+
 <?php include(ROOT_PATH . "utils/nav.php"); ?>
 
 <div class="index">
-
-    <!-- HEADER -->
     <div class="header-banner">
         <h1>Payment History</h1>
         <p>All your completed transactions in one place</p>
     </div>
 
-    <!-- TABLE CARD -->
     <div class="payment-card">
-
         <?php if ($payments->num_rows > 0): ?>
-
         <table class="payment-table">
-            <thead>
                 <tr>
                     <th>Reference</th>
                     <th>Amount</th>
@@ -44,50 +49,52 @@ $payments = $stmt->get_result();
                     <th>Method</th>
                     <th>Date</th>
                 </tr>
-            </thead>
-
-            <tbody>
-                <?php while ($row = $payments->fetch_assoc()): ?>
-                <tr class="clickable-row"
+                <?php while ($row = $payments->fetch_assoc()): 
+                    $status = strtolower($row['payment_status']);
+                    $formattedDate = date("M d, Y", strtotime($row['payment_date']));
+                    $formattedAmount = number_format($row['amount_paid'], 2);
+                ?>
+                <tr class="clickable-row" 
                     data-ref="<?= htmlspecialchars($row['payment_reference']) ?>"
-                    data-amount="<?= number_format($row['amount_paid'],2) ?>"
-                    data-status="<?= ucfirst($row['payment_status']) ?>"
+                    data-amount="<?= $formattedAmount ?>"
+                    data-status="<?= ucfirst($status) ?>"
                     data-method="<?= htmlspecialchars($row['payment_method']) ?>"
-                    data-date="<?= date("M d, Y", strtotime($row['payment_date'])) ?>"
+                    data-date="<?= $formattedDate ?>"
                 >
-                    <td><?= htmlspecialchars($row['payment_reference']) ?></td>
-                    <td>₱<?= number_format($row['amount_paid'],2) ?></td>
+                    <td class="reference-no"><?= htmlspecialchars($row['payment_reference']) ?></td>
+                    <td class="amount">₱<?= $formattedAmount ?></td>
                     <td>
-                        <span class="badge <?= $row['payment_status'] ?>">
-                            <?= ucfirst($row['payment_status']) ?>
+                        <span class="badge <?= $status ?>">
+                            <?= ucfirst($status) ?>
                         </span>
                     </td>
                     <td><?= htmlspecialchars($row['payment_method']) ?></td>
-                    <td><?= date("M d, Y", strtotime($row['payment_date'])) ?></td>
+                    <td><?= $formattedDate ?></td>
                 </tr>
                 <?php endwhile; ?>
-            </tbody>
-
         </table>
-
         <?php else: ?>
-            <div class="empty">No payment records yet</div>
+            <div class="empty">
+                <p>No payment records yet.</p>
+            </div>
         <?php endif; ?>
-
     </div>
 </div>
 
-<!-- RECEIPT MODAL -->
 <div id="receiptModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Receipt</h2>
-
-        <p><b>Reference:</b> <span id="m-ref"></span></p>
-        <p><b>Amount:</b> ₱<span id="m-amount"></span></p>
-        <p><b>Status:</b> <span id="m-status"></span></p>
-        <p><b>Method:</b> <span id="m-method"></span></p>
-        <p><b>Date:</b> <span id="m-date"></span></p>
+        <h2 style="margin-bottom: 20px; color: var(--primary);">Transaction Receipt</h2>
+        
+        <div class="receipt-body">
+            <p><b>Reference:</b> <span id="m-ref"></span></p>
+            <p><b>Amount:</b> ₱<span id="m-amount"></span></p>
+            <p><b>Status:</b> <span id="m-status"></span></p>
+            <p><b>Method:</b> <span id="m-method"></span></p>
+            <p><b>Date:</b> <span id="m-date"></span></p>
+        </div>
+        
+        <button onclick="window.print()" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Print Receipt</button>
     </div>
 </div>
 
@@ -115,3 +122,6 @@ window.onclick = (e) => {
     if (e.target == modal) modal.style.display = "none";
 };
 </script>
+
+</body>
+</html>

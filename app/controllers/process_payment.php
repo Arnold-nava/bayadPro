@@ -40,7 +40,7 @@ if ($payment_type === 'installment') {
     // PAY ONE INSTALLMENT
     $installment_id = (int) ($_POST['installment_id'] ?? 0);
 
-    // VERIFY IT BELONGS TO THIS STUDENT AND IS UNPAID
+    // VERIFY PAID
     $sql = "SELECT * FROM payment_installments 
             WHERE id = ? AND student_id = ? AND status = 'unpaid' LIMIT 1";
     $stmt = $conn->prepare($sql);
@@ -54,7 +54,7 @@ if ($payment_type === 'installment') {
         exit();
     }
 
-    // CHECK PREVIOUS MONTH IS PAID (block if unpaid)
+    // CHECK PREVIOUS 
     if ($installment['month_number'] > 1) {
         $prevMonth = $installment['month_number'] - 1;
         $sql = "SELECT status FROM payment_installments 
@@ -79,7 +79,7 @@ if ($payment_type === 'installment') {
     $stmt->bind_param("si", $reference, $installment_id);
 
     if ($stmt->execute()) {
-        // LOG IN PAYMENTS TABLE WITH payment_month
+        // LOG IN PAYMENTS 
         $sql = "INSERT INTO payments 
                 (student_id, tuition_id, payment_reference, amount_paid, payment_type, payment_month, payment_status, payment_method)
                 VALUES (?, ?, ?, ?, 'installment', ?, 'paid', 'GCash')";
@@ -110,7 +110,7 @@ if ($payment_type === 'installment') {
 
     $tuition_id = $tuitionRow['id'];
 
-    // CHECK ALREADY FULLY PAID
+    // CHECK IF FULLY PAID
     $sql = "SELECT id FROM payments 
             WHERE tuition_id = ? AND payment_type = 'full' AND payment_status = 'paid' LIMIT 1";
     $stmt = $conn->prepare($sql);
@@ -130,7 +130,7 @@ if ($payment_type === 'installment') {
     $stmt->bind_param("iisd", $student_id, $tuition_id, $reference, $amount);
 
     if ($stmt->execute()) {
-        // MARK ALL INSTALLMENTS PAID TOO (if any exist)
+        // MARK ALL INSTALLMENTS 
         $sql = "UPDATE payment_installments SET status = 'paid' WHERE tuition_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $tuition_id);

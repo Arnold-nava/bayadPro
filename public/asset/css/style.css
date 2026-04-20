@@ -28,7 +28,6 @@ body {
     overflow: hidden;
 }
 
-/* ===== NAVBAR ===== */
 .container {
     width: 260px;
     height: 100vh;
@@ -72,7 +71,6 @@ body {
     color: var(--muted);
 }
 
-/* ===== NAV MENU ===== */
 .nav-menu {
     display: flex;
     flex-direction: column;
@@ -93,7 +91,6 @@ body {
     color: white;
 }
 
-/* ===== LOGOUT BUTTON ===== */
 .action-btn {
     margin-top: auto;
 }
@@ -117,7 +114,6 @@ body {
     background: var(--primary-dark);
 }
 
-/* ===== MAIN CONTENT ===== */
 .index {
     margin-left: 280px;
     padding: 40px;
@@ -134,7 +130,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* ===== CARD STYLE (for future use) ===== */
 .card {
     background: var(--card);
     padding: 20px;
@@ -144,7 +139,6 @@ body {
     width: fit-content;
 }
 
-/* 1. THE HERO BANNER */
 .header-banner {
     background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
     padding: 40px;
@@ -157,7 +151,7 @@ body {
 .header-banner h1 {
     font-size: 2rem;
     margin-bottom: 8px;
-    color: white; /* Overriding default header color */
+    color: white;
 }
 
 .header-banner p {
@@ -165,11 +159,10 @@ body {
     font-size: 1rem;
 }
 
-/* 2. REFINED PROFILE CARD */
 .profile-card {
     
     background: var(--card);
-    padding: 0; /* Changed to 0 so we can have internal padding */
+    padding: 0; 
     border-radius: 20px;
     box-shadow: var(--shadow);
     border: 1px solid #eef0f7;
@@ -207,7 +200,6 @@ body {
     border-right: none;
 }
 
-/* 3. CARD FOOTER ACTIONS */
 .card-footer-actions {
     padding: 20px 30px;
     display: flex;
@@ -215,7 +207,6 @@ body {
     border-top: 1px solid #f1f5f9;
 }
 
-/* 4. BUTTON STYLES */
 .btn-primary {
     background: var(--primary);
     color: white;
@@ -245,7 +236,6 @@ body {
     background: #f1f5f9;
 }
 
-/* 5. BADGE REFINEMENT */
 .badge-success {
     text-align: center;
     background: #b0f3c8;
@@ -256,9 +246,9 @@ body {
     padding: 4px 10px;
     
 }
-/* ===== FOOTER ===== */
+
 .footer {
-    margin-left: 280px; /* same as sidebar */
+    margin-left: 280px; 
     background: var(--card);
     padding: 20px 40px;
     box-shadow: 0 -5px 15px rgba(0,0,0,0.05);

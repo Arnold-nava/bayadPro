@@ -11,7 +11,7 @@ if (!isset($_SESSION['id']) || $_SERVER["REQUEST_METHOD"] !== "POST") {
 
 $student_id = $_SESSION['id'];
 
-/* GET TUITION ID */
+/* GET */
 $sql = "SELECT id FROM student_tuition WHERE student_id = ? ORDER BY id DESC LIMIT 1";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $student_id);
@@ -26,7 +26,7 @@ if (!$tuitionRow) {
 
 $tuition_id = $tuitionRow['id'];
 
-/* DELETE ONLY UNPAID INSTALLMENTS */
+/* DELETE */
 $sql = "DELETE FROM payment_installments WHERE tuition_id = ? AND status = 'unpaid'";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $tuition_id);

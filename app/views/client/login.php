@@ -4,7 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// SAFE DB PATH (no ../../../)
 require_once($_SERVER['DOCUMENT_ROOT'] . "/bayadPro/config/root.php");
 require_once(ROOT_PATH . "config/db.php");
 
@@ -54,10 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Login</title>
 
-    <!-- MAIN CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/asset/css/login.css">
 
-    <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>

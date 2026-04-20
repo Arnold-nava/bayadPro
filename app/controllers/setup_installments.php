@@ -14,7 +14,7 @@ $student_id = $_SESSION['id'];
 $result  = calculateTuition($conn, $student_id, "1st Sem", "2026-2027");
 $balance = $result['final'];
 
-/* GET TUITION ID */
+/* TUITION ID */
 $sql = "SELECT id FROM student_tuition WHERE student_id = ? ORDER BY id DESC LIMIT 1";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $student_id);
@@ -27,7 +27,7 @@ if (!$tuitionRow) {
 
 $tuition_id = $tuitionRow['id'];
 
-/* CHECK IF ALREADY FULLY PAID */
+/* CHECK IF FULLY PAID */
 $sql = "SELECT id FROM payments 
         WHERE tuition_id = ? AND payment_type = 'full' AND payment_status = 'paid' LIMIT 1";
 $stmt = $conn->prepare($sql);
@@ -39,7 +39,7 @@ if ($stmt->get_result()->fetch_assoc()) {
     exit();
 }
 
-/* CHECK IF INSTALLMENTS ALREADY EXIST */
+/* CHECK IF INSTALLMENTS EXIST */
 $sql = "SELECT id FROM payment_installments WHERE tuition_id = ? LIMIT 1";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $tuition_id);
@@ -50,7 +50,6 @@ if ($stmt->get_result()->fetch_assoc()) {
     exit();
 }
 
-/* CREATE 5 MONTHLY INSTALLMENTS */
 $months  = 5;
 $monthly = round($balance / $months, 2);
 
