@@ -16,9 +16,8 @@ body {
     margin: 0;
 }
 
-/* LAYOUT FIX: Ensures content doesn't feel squashed */
 .index {
-    margin-left: 280px; /* Aligns with your sidebar width */
+    margin-left: 280px; 
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -26,7 +25,6 @@ body {
     min-height: 100vh;
 }
 
-/* HEADER: Vibrant Gradient with Depth */
 .header-banner {
     background: linear-gradient(135deg, var(--primary), #7c3aed);
     padding: 40px;
@@ -47,7 +45,6 @@ body {
     font-size: 15px;
 }
 
-/* TABLE CARD: The "Pro" Container */
 .payment-card {
     background: var(--card);
     border-radius: var(--radius);
@@ -61,7 +58,6 @@ body {
     border-collapse: collapse;
 }
 
-/* TABLE HEADER: Modern Uppercase Style */
 .payment-table th {
     text-align: left;
     padding: 18px 24px;
@@ -74,7 +70,6 @@ body {
     border-bottom: 1px solid #eee;
 }
 
-/* TABLE ROWS: SaaS Interaction Style */
 .payment-table tr {
     position: relative;
     transition: background 0.2s ease;
@@ -88,7 +83,6 @@ body {
     color: #4b5563;
 }
 
-/* HOVER EFFECT: Left-accent indicator instead of full-row scale */
 .payment-table tr:hover {
     background: #f8fafc;
 }
@@ -108,7 +102,6 @@ body {
     width: 4px;
 }
 
-/* STATUS BADGES: Lively Glow */
 .badge {
     padding: 6px 12px;
     border-radius: 50px;
@@ -129,7 +122,6 @@ body {
     border: 1px solid #fde68a;
 }
 
-/* FONT WEIGHTS FOR DATA */
 .reference-no {
     font-weight: 600;
     color: var(--text);

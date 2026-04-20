@@ -24,7 +24,6 @@ body {
     align-items: center;
 }
 
-/* FORM CARD */
 form {
     background: var(--card);
     padding: 35px 30px;
@@ -35,13 +34,11 @@ form {
     animation: fadeSlideIn 0.5s ease;
 }
 
-/* TITLE */
 form h2 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* INPUT */
 form input {
     width: 100%;
     padding: 12px;
@@ -52,13 +49,11 @@ form input {
     transition: 0.3s;
 }
 
-/* FOCUS */
 form input:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
 }
 
-/* BUTTON */
 form button {
     width: 100%;
     padding: 12px;
@@ -74,7 +69,6 @@ form button:hover {
     background: var(--primary-dark);
 }
 
-/* ERROR */
 .error {
     background: #fee2e2;
     color: #991b1b;
@@ -85,7 +79,6 @@ form button:hover {
     animation: shake 0.3s ease-in-out;
 }
 
-/* LOGIN LINK */
 .login-link {
     margin-top: 15px;
     text-align: center;
@@ -148,30 +141,26 @@ form button:hover {
     100% { transform: translateX(0); }
 }
 
-/* INPUT GROUP */
 .input-group {
     position: relative;
     width: 100%;
     margin-bottom: 15px;
 }
 
-/* INPUT FIELD */
 .input-group input {
     width: 100%;
-    padding: 12px 45px 12px 12px; /* space for icon */
+    padding: 12px 45px 12px 12px; 
     border: 1px solid #ddd;
     border-radius: var(--radius);
     outline: none;
     transition: 0.3s;
 }
 
-/* FOCUS */
 .input-group input:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
 }
 
-/* ICON AREA */
 .icon {
     position: absolute;
     right: 12px;
@@ -185,7 +174,6 @@ form button:hover {
     transition: 0.2s;
 }
 
-/* ICON HOVER */
 .icon:hover {
     color: var(--primary);
     transform: translateY(-50%) scale(1.15);

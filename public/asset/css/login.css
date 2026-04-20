@@ -5,8 +5,7 @@
     --card: #ffffff;
     --text: #1f2937;
     --muted: #6b7280;
-    --radius: 12px;
-    --shadow: 0 10px 25px rgba(0,0,0,0.08);
+    --radius: 14px;
 }
 
 * {
@@ -24,125 +23,110 @@ body {
     align-items: center;
 }
 
+.auth-wrapper {
+    width: 900px;
+    height: 520px;
+    display: flex;
+    border-radius: 18px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    position: relative;
+}
+
+.panel {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.6s ease;
+}
+
+.login-panel {
+    background: white;
+}
+
+.register-panel {
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    color: white;
+}
+
 form {
-    background: var(--card);
-    padding: 35px 30px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    width: 100%;
-    max-width: 380px;
-    animation: fadeSlideIn 0.5s ease-out;
-    animation: shake 0.3s ease-in-out;
+    width: 300px;
 }
 
-form h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: var(--text);
+h2 {
+    margin-bottom: 15px;
 }
 
-label {
-    display: block;
-    margin-top: 10px;
-    font-size: 14px;
-    color: var(--text);
-}
-
-form label {
-    font-size: 14px;
-    color: var(--muted);
-}
-
-form input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
-}
-
-form button {
+input {
     width: 100%;
     padding: 12px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: var(--radius);
-    cursor: pointer;
-    font-size: 15px;
-    transition: 0.3s;
-}
-
-form button:hover {
-    background: var(--primary-dark);
-}
-
-.error {
-    background: #fee2e2;
-    color: #991b1b;
-    padding: 10px;
-    border-radius: var(--radius);
-    margin-bottom: 15px;
-    font-size: 14px;
-    text-align: center;
-}
-
-@media (max-width: 500px) {
-    form {
-        padding: 25px 20px;
-    }
-}
-
-@keyframes fadeSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
 }
 
 .input-group {
     position: relative;
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 12px 45px 12px 12px; /* space for icon */
-    border: 1px solid #ddd;
-    border-radius: var(--radius);
-    outline: none;
-    transition: 0.3s;
-}
-
-.input-group input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
 }
 
 .icon {
     position: absolute;
     right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 40%;
     cursor: pointer;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
 }
 
-.icon:hover {
+button, .btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.switch-text {
+    margin-top: 15px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.switch-text a {
     color: var(--primary);
-    transform: translateY(-50%) scale(1.15);
+    cursor: pointer;
+}
+
+/* REGISTER PANEL CONTENT */
+.info-box {
+    text-align: center;
+    max-width: 260px;
+}
+
+/* SLIDE ANIMATION */
+.auth-wrapper.slide .login-panel {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.auth-wrapper.slide .register-panel {
+    transform: translateX(-100%);
+}
+
+/* ERROR */
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
 }

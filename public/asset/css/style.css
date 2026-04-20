@@ -295,7 +295,6 @@ body {
     color: var(--muted);
 }
 
-/* payment section */
 .payment-card {
     background: var(--card);
     padding: 25px;
@@ -352,4 +351,3 @@ body {
     margin-top:10px; 
     text-align:center;
 }
-
