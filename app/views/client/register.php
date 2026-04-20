@@ -31,11 +31,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $student = $result->fetch_assoc();
     $student_id = $student['id'];
+    $role = "student";
 
     // 3. CHECK IF ALREADY REGISTERED
-    $check = "SELECT id FROM user_cred WHERE student_id = ?";
+    $check = "SELECT id, role FROM user_cred WHERE student_id = ?";
     $checkStmt = $conn->prepare($check);
-    $checkStmt->bind_param("i", $student_id);
+    $checkStmt->bind_param("is", $student_id, $role);
     $checkStmt->execute();
     $checkResult = $checkStmt->get_result();
 
@@ -45,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // 4. CREATE LOGIN ACCOUNT
-    $insert = "INSERT INTO user_cred (student_id, username, password)
-               VALUES (?, ?, ?)";
+    $insert = "INSERT INTO user_cred (student_id, username, password, role)
+               VALUES (?, ?, ?, ?)";
 
     $insertStmt = $conn->prepare($insert);
-    $insertStmt->bind_param("iss", $student_id, $username, $password);
+    $insertStmt->bind_param("iss", $student_id, $username, $password, $role);
     $insertStmt->execute();
 
     // 5. AUTO LOGIN
