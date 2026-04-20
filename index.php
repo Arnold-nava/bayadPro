@@ -38,57 +38,51 @@ $student = $stmt->get_result()->fetch_assoc();
 </head>
 <body>
 
-<div class="index">
-    <div class="header">
-        <h1>Welcome, <?= htmlspecialchars($student['first_name']) ?> 👋</h1>
-        <p class="subtext">Here is your student dashboard overview</p>
-    </div>
-
-    <div class="card-grid">
-        <div class="card">
-            <div class="card-header">
-                <span class="icon">📘</span>
-                <span class="label">Program</span>
-            </div>
-            <div class="value"><?= htmlspecialchars($student['program']) ?></div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="icon">🎓</span>
-                <span class="label">Year Level</span>
-            </div>
-            <div class="value"><?= htmlspecialchars($student['year_level']) ?></div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="icon">🆔</span>
-                <span class="label">Student ID</span>
-            </div>
-            <div class="value"><?= htmlspecialchars($student['student_number']) ?></div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span class="icon">💳</span>
-                <span class="label">Payment Status</span>
-            </div>
-            <div class="value">
-                <span class="badge badge-success">Active</span>
+    <div class="index">
+        <div class="header-banner">
+            <div class="header-text">
+                <h1>Welcome back, <?= htmlspecialchars($student['first_name']) ?> 👋</h1>
+                <p>You are currently enrolled in <?= htmlspecialchars($student['program']) ?>.</p>
             </div>
         </div>
-    </div>
 
-    <div class="actions-section">
-        <h3>Quick Actions</h3>
-        <div class="btn-group">
-            <a href="<?= BASE_URL ?>app/views/client/payment_history.php" class="btn btn-primary">
-                View Payments
-            </a>
+        <div class="profile-card">
+            <div class="profile-info-grid">
+                <div class="info-item">
+                    <span class="label">Program</span>
+                    <div class="value"><?= htmlspecialchars($student['program']) ?></div>
+                </div>
+
+                <div class="info-item">
+                    <span class="label">Year Level</span>
+                    <div class="value"><?= htmlspecialchars($student['year_level']) ?></div>
+                </div>
+
+                <div class="info-item">
+                    <span class="label">Student ID</span>
+                    <div class="value"><?= htmlspecialchars($student['student_number']) ?></div>
+                </div>
+
+                <div class="info-item">
+                    <span class="label">Payment Status</span>
+                    <div class="value">
+                        <span class="badge badge-success">● Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer-actions">
+                <a href="<?= BASE_URL ?>app/views/client/payment_history.php" class="btn btn-primary">
+                    View Payment History
+                </a>
+                <a href="<?= BASE_URL ?>app/views/client/profile.php" class="btn btn-outline">
+                    Manage Profile
+                </a>
+            </div>
         </div>
     </div>
-</div>
+    
+    <?php include("utils/footer.php"); ?>
 
 </body>
 </html>

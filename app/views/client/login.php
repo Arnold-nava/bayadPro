@@ -27,11 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
     $result = $stmt->get_result();
 
+    $error = "";
+
     if ($result->num_rows == 1) {
 
         $row = $result->fetch_assoc();
 
-        // SAFE PASSWORD CHECK (IMPORTANT FIX)
         if (password_verify($pass, $row['password'])) {
 
             $_SESSION['id'] = $row['student_id'];
@@ -40,23 +41,69 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
 
         } else {
-            echo "Wrong password!";
+            $error = "Wrong password!";
         }
 
     } else {
-        echo "User not found!";
+        $error = "User not found!";
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/asset/css/login.css">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
 
 <form method="POST">
     <h2>Login</h2>
 
-    username:<br>
-    <input type="text" name="user"><br><br>
+    <?php if (!empty($error)): ?>
+        <div class="error"><?= $error ?></div>
+    <?php endif; ?>
 
-    password:<br>
-    <input type="password" name="pass"><br><br>
+    <label>Username</label>
+    <input type="text" name="user" required>
 
-    <button type="submit">login</button>
+    <label>Password</label>
+    <div class="input-group">
+        <input type="password" name="pass" id="password" placeholder="Password" required>
+        <span class="icon" onclick="togglePassword('password', this)">
+            <i class="fa-solid fa-eye"></i>
+        </span>
+    </div>
+
+    <button type="submit">Login</button>
+
+    <p class="login-link">
+        No account?
+        <a href="<?= BASE_URL ?>app/views/client/register.php">Register</a>
+    </p>
 </form>
+
+<script>
+function togglePassword(id, iconWrapper) {
+    const input = document.getElementById(id);
+    const icon = iconWrapper.querySelector("i");
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+</script>
+
+</body>
+</html>

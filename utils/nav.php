@@ -33,7 +33,7 @@
     <div class="nav-menu">
         <a href="<?= BASE_URL ?>index.php">Profile</a>
         <a href="<?= BASE_URL ?>app/views/client/payment_history.php">Payment History</a>
-        <a href="<?= BASE_URL ?>app/views/client/profile.php">Balance</a>
+        <a href="<?= BASE_URL ?>app/views/client/balance.php">Balance</a>
     </div>
 
     <div class="action-btn">
