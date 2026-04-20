@@ -101,6 +101,8 @@ if (!empty($installments)) {
     $balance = $balance - $paidSoFar;
 }
 
+
+
 /* STORE AMOUNT IN SESSION FOR GCASH PAGE */
 $_SESSION['pay_amount'] = $balance;
 ?>

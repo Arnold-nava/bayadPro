@@ -7,13 +7,13 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once($_SERVER['DOCUMENT_ROOT'] . "/bayadPro/config/root.php");
 require_once(ROOT_PATH . "config/db.php");
 
-// CHECK LOGIN
+// LOGIN
 if (!isset($_SESSION['id'])) {
     header("Location: " . BASE_URL . "app/views/client/register.php");
     exit();
 }
 
-// STUDENT ID
+// STUDENT
 $student_id = $_SESSION['id'];
 
 $sql = "SELECT * FROM student_list WHERE id = ?";

@@ -1,5 +1,4 @@
-<?php
-
+<?php   
     require_once($_SERVER['DOCUMENT_ROOT'] . "/bayadPro/config/root.php");
     require_once(ROOT_PATH . "config/db.php");
 

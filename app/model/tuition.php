@@ -77,6 +77,7 @@ function calculateTuition($conn, $student_id, $semester, $school_year) {
         $stmt->bind_param("issddd", $student_id, $semester, $school_year, $tuition, $discountAmount, $finalTuition);
         $stmt->execute();
     }
+    
 
     return [
         "base"     => $tuition,
