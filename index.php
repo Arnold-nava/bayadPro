@@ -13,7 +13,7 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
-// GET STUDENT
+// STUDENT ID
 $student_id = $_SESSION['id'];
 
 $sql = "SELECT * FROM student_list WHERE id = ?";
