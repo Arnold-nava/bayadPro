@@ -1,12 +1,18 @@
 <?php
-session_start();
-require_once("../../../config/db.php");
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once('../../../config/db.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . "/bayadPro/config/root.php");
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $student_number = $_POST['student_number'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $student_number = trim($_POST['student_number']);
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
     // 1. VALIDATION
     if (empty($student_number) || empty($username) || empty($password)) {
@@ -14,10 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // HASH PASSWORD
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
-    // 2. FIND STUDENT IN student_list
+    // 2. FIND STUDENT
     $sql = "SELECT id FROM student_list WHERE student_number = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $student_number);
@@ -31,12 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $student = $result->fetch_assoc();
     $student_id = $student['id'];
-    $role = "student";
 
     // 3. CHECK IF ALREADY REGISTERED
-    $check = "SELECT id, role FROM user_cred WHERE student_id = ?";
+    $check = "SELECT id FROM user_cred WHERE student_id = ?";
     $checkStmt = $conn->prepare($check);
-    $checkStmt->bind_param("is", $student_id, $role);
+    $checkStmt->bind_param("i", $student_id);
     $checkStmt->execute();
     $checkResult = $checkStmt->get_result();
 
@@ -45,24 +47,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // 4. CREATE LOGIN ACCOUNT
+    // 4. HASH PASSWORD
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $role = "student";
+
+    // 5. INSERT ACCOUNT
     $insert = "INSERT INTO user_cred (student_id, username, password, role)
                VALUES (?, ?, ?, ?)";
 
     $insertStmt = $conn->prepare($insert);
-    $insertStmt->bind_param("iss", $student_id, $username, $password, $role);
+    $insertStmt->bind_param("isss", $student_id, $username, $hashedPassword, $role);
     $insertStmt->execute();
 
-    // 5. AUTO LOGIN
+    // 6. LOGIN USER
     $_SESSION['id'] = $student_id;
 
-    // 6. REDIRECT DASHBOARD
-    header("Location: ../../../index.php");
+    // 7. REDIRECT
+    header("Location: " . BASE_URL . "index.php");
     exit();
 }
 ?>
 
-<!-- REGISTER FORM -->
 <form method="POST">
     <h2>Student Register</h2>
 
@@ -77,5 +82,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <button type="submit">Register</button>
 </form>
-
-test

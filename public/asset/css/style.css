@@ -1,0 +1,177 @@
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --radius: 12px;
+    --shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* ===== NAVBAR ===== */
+.container {
+    width: 260px;
+    height: 100vh;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile {
+    text-align: center;
+}
+
+.username {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.student_number {
+    font-size: 1.2rem;
+    color: var(--muted);
+}
+
+/* ===== NAV MENU ===== */
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text);
+    padding: 12px;
+    border-radius: var(--radius);
+    transition: 0.3s;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-menu a:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.action-btn {
+    margin-top: auto;
+}
+
+.action-btn a {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.action-btn a:hover {
+    background: var(--primary-dark);
+}
+
+.action-btn a:hover {
+    background: var(--primary-dark);
+}
+
+/* ===== MAIN CONTENT ===== */
+.index {
+    margin-left: 280px;
+    padding: 40px;
+}
+
+.index h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.index p {
+    color: var(--muted);
+    margin-bottom: 5px;
+}
+
+/* ===== CARD STYLE (for future use) ===== */
+.card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.subtext {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+/* GRID */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* CARD */
+.card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* HIGHLIGHT CARD */
+.card.highlight {
+    background: white;
+    color: black;
+}
+
+/* ACTIONS */
+.actions {
+    margin-top: 20px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 10px 15px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+}

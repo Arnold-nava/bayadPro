@@ -1,11 +1,17 @@
 <?php
-session_start();
-require_once('../../../config/db.php');
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// SAFE DB PATH (no ../../../)
+require_once($_SERVER['DOCUMENT_ROOT'] . "/bayadPro/config/root.php");
+require_once(ROOT_PATH . "config/db.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $username = $_POST['user'];
-    $pass = $_POST['pass'];
+    $username = trim($_POST['user']);
+    $pass = trim($_POST['pass']);
 
     if (empty($username) || empty($pass)) {
         echo "Please enter username or password!";
@@ -25,12 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $row = $result->fetch_assoc();
 
-        if ($pass == $row['password']) {
+        // SAFE PASSWORD CHECK (IMPORTANT FIX)
+        if (password_verify($pass, $row['password'])) {
 
-            // IMPORTANT FIX
             $_SESSION['id'] = $row['student_id'];
 
-            header("Location: ../../../index.php");
+            header("Location: " . BASE_URL . "index.php");
             exit();
 
         } else {
@@ -44,11 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <form method="POST">
+    <h2>Login</h2>
+
     username:<br>
-    <input type="text" name="user"><br>
+    <input type="text" name="user"><br><br>
 
     password:<br>
-    <input type="password" name="pass"><br>
+    <input type="password" name="pass"><br><br>
 
     <button type="submit">login</button>
 </form>
