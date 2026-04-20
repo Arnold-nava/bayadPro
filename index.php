@@ -4,7 +4,7 @@
 
     // 1. CHECK LOGIN
     if (!isset($_SESSION['id'])) {
-        header("Location: login.php");
+        header("Location: app/views/client/register.php");
         exit();
     }
 
