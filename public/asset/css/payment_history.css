@@ -1,92 +1,141 @@
 :root {
     --primary: #4f46e5;
-    --primary-dark: #3730a3;
+    --primary-light: #818cf8;
     --bg: #f4f6fb;
     --card: #ffffff;
     --text: #1f2937;
     --muted: #6b7280;
-    --radius: 12px;
-    --shadow: 0 10px 25px rgba(0,0,0,0.08);
+    --radius: 14px;
+    --shadow: 0 12px 30px rgba(0,0,0,0.06);
 }
 
 body {
     background: var(--bg);
     font-family: "Segoe UI", sans-serif;
+    color: var(--text);
+    margin: 0;
 }
 
-/* MAIN */
+/* LAYOUT FIX: Ensures content doesn't feel squashed */
 .index {
-    margin-left: 280px;
+    margin-left: 280px; /* Aligns with your sidebar width */
     padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    min-height: 100vh;
 }
 
-/* HEADER */
+/* HEADER: Vibrant Gradient with Depth */
 .header-banner {
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, var(--primary), #7c3aed);
     padding: 40px;
     border-radius: 20px;
     color: white;
-    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.15);
 }
 
-/* CARD */
+.header-banner h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.header-banner p {
+    margin: 10px 0 0;
+    opacity: 0.9;
+    font-size: 15px;
+}
+
+/* TABLE CARD: The "Pro" Container */
 .payment-card {
     background: var(--card);
-    padding: 25px;
-    border-radius: 20px;
+    border-radius: var(--radius);
     box-shadow: var(--shadow);
-    border: 1px solid #eef0f7;
+    border: 1px solid #eef2f7;
+    overflow: hidden;
 }
 
-/* TABLE */
 .payment-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.payment-table th,
-.payment-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #f1f5f9;
-}
-
+/* TABLE HEADER: Modern Uppercase Style */
 .payment-table th {
-    background: #f8fafc;
-    font-size: 14px;
-    color: var(--muted);
-}
-
-.payment-table tr:hover {
-    background: #f9fafb;
-}
-
-/* BADGES */
-.badge {
-    padding: 5px 10px;
-    border-radius: 20px;
+    text-align: left;
+    padding: 18px 24px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--muted);
+    background: #fafafa;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #eee;
+}
+
+/* TABLE ROWS: SaaS Interaction Style */
+.payment-table tbody tr {
+    position: relative;
+    transition: background 0.2s ease;
+    cursor: default;
+}
+
+.payment-table td {
+    padding: 20px 24px;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #4b5563;
+}
+
+/* HOVER EFFECT: Left-accent indicator instead of full-row scale */
+.payment-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.payment-table tbody tr::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0px;
+    background: var(--primary);
+    transition: 0.2s;
+}
+
+.payment-table tbody tr:hover::before {
+    width: 4px; /* The "Active" line */
+}
+
+/* STATUS BADGES: Lively Glow */
+.badge {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
 }
 
 .badge.paid {
     background: #dcfce7;
-    color: #166534;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
 }
 
 .badge.pending {
     background: #fef3c7;
     color: #92400e;
+    border: 1px solid #fde68a;
 }
 
-.badge.partial {
-    background: #e0f2fe;
-    color: #075985;
+/* FONT WEIGHTS FOR DATA */
+.reference-no {
+    font-weight: 600;
+    color: var(--text);
 }
 
-/* EMPTY */
-.no-data {
-    text-align: center;
-    color: var(--muted);
-    padding: 20px;
+.amount {
+    font-weight: 600;
+    color: var(--text);
 }

@@ -68,9 +68,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php if (!empty($error)): ?>
         <div class="error"><?= $error ?></div>
     <?php endif; ?>
-
-    <label>Username</label>
-    <input type="text" name="user" required>
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" name="user" required>
+    </div>
+        
 
     <label>Password</label>
     <div class="input-group">

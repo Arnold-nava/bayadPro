@@ -26,6 +26,7 @@
 
 <div class="container">
     <div class="profile">
+        <span class="profile-img"><i class="fa-solid fa-user"></i></span>
         <span class="username"><?php echo $student['first_name']; ?></span>
         <span class="student_number"></i><?php echo $student['student_number']; ?></span>
     </div>

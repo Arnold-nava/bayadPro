@@ -42,6 +42,9 @@ unset($_SESSION['gcash_error']);
 
     <form action="<?= BASE_URL ?>app/controllers/process_payment.php" method="POST">
 
+        <input type="hidden" name="payment_type" value="<?= htmlspecialchars($_POST['payment_type'] ?? 'full') ?>">
+        <input type="hidden" name="installment_id" value="<?= htmlspecialchars($_POST['installment_id'] ?? '') ?>">
+
         <label>GCash Mobile Number</label>
         <input type="text" name="gcash_number" placeholder="09XX XXX XXXX" maxlength="11" required>
 

@@ -94,11 +94,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="error"><?= $error ?></div>
     <?php endif; ?>
 
-    <label>Student Number</label>
+    <div class="input-group">
+        <label>Student Number</label>
     <input type="text" name="student_number" required>
+    </div>
 
-    <label>Username</label>
-    <input type="text" name="username" required>
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" name="username" required>
+    </div>
 
     <label>Password</label>
     <div class="input-group">

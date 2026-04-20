@@ -64,9 +64,9 @@ $student = $stmt->get_result()->fetch_assoc();
                 </div>
 
                 <div class="info-item">
-                    <span class="label">Payment Status</span>
+                    <span class="label">Status</span>
                     <div class="value">
-                        <span class="badge badge-success">● Active</span>
+                        <span class="badge-success"><?= htmlspecialchars($student['status']) ?></span>
                     </div>
                 </div>
             </div>
@@ -74,9 +74,6 @@ $student = $stmt->get_result()->fetch_assoc();
             <div class="card-footer-actions">
                 <a href="<?= BASE_URL ?>app/views/client/payment_history.php" class="btn btn-primary">
                     View Payment History
-                </a>
-                <a href="<?= BASE_URL ?>app/views/client/profile.php" class="btn btn-outline">
-                    Manage Profile
                 </a>
             </div>
         </div>
